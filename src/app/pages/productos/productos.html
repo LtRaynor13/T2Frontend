@@ -1,0 +1,41 @@
+<h2>Productos</h2>
+<table border="1">
+<thead>
+<tr>
+<th>ID</th>
+<th>Nombre</th>
+<th>Categoría</th>
+<th>Precio</th>
+<th>Stock</th>
+<th>Acciones</th>
+</tr>
+</thead>
+<tbody>
+@for (producto of productos(); track producto.id) {
+<tr>
+<td>{{ producto.id }}</td>
+<td>{{ producto.nombre }}</td>
+<td>{{ producto.categoria }}</td>
+<td>S/ {{ producto.precio }}</td>
+<td>{{ producto.stock }}</td>
+<td>
+<!-- <button>Editar</button> -->
+<button (click)="seleccionarParaEditar(producto)">
+  Editar
+</button>
+<button
+(click)="eliminar(producto.id!)">
+Eliminar
+</button>
+</td>
+</tr>
+}@empty {
+      <tr>
+        <td colspan="6">No hay productos disponibles.</td>
+      </tr>
+    }
+</tbody>
+</table>
+
+<br/>
+<app-producto-form (productoGuardado)="cargarProductos()"></app-producto-form>

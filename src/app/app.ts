@@ -1,12 +1,17 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+import { Component, inject } from '@angular/core';
+import { Router,  RouterOutlet } from '@angular/router';
+import { AuthService } from './core/services/auth.service';
 @Component({
-  imports: [RouterOutlet],
-  selector: 'app-root',
-  styleUrl: './app.css',
-  templateUrl: './app.html',
+selector: 'app-root',
+standalone: true,
+imports: [RouterOutlet],
+templateUrl: './app.html'
 })
-export class App {
-  protected readonly title = signal('be-eccomerce-LeonFernandoFrontend');
+export class AppComponent {
+private authService = inject(AuthService);
+private router = inject(Router);
+logout(): void {
+this.authService.logout();
+this.router.navigate(['/login']);
+}
 }
